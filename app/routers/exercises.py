@@ -20,8 +20,6 @@ router = APIRouter(tags=["exercises"])
 @router.get("/", response_model=List[ExerciseReadDTO])
 async def list_all_exercises(user: AuthToken = Depends(get_current_user)):
     """Apenas admins podem ver a biblioteca global de exercícios."""
-    if user.role != "admin":
-        raise HTTPException(status_code=403, detail="Acesso negado")
     return await interpreter.list_all_exercises()
 
 @router.get("/{ex_id}/connection")

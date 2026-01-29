@@ -132,6 +132,9 @@ class InterpreterClient:
     async def get_scoreboard(self, comp_id: str) -> List[Dict]:
         return await self._request("GET", f"/scoreboard/{comp_id}")
 
+    async def get_global_scoreboard(self) -> List[Dict]:
+        return await self._request("GET", "/scoreboard/global")
+
     # --- 7. TAGS ---
     async def list_tags(self) -> List[Dict]:
         return await self._request("GET", "/tags/")

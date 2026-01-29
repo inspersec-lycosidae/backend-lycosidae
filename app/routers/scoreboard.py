@@ -10,6 +10,15 @@ from app.logger import get_logger
 logger = get_logger(__name__)
 router = APIRouter(tags=["scoreboard"])
 
+@router.get("/global", response_model=List[ScoreboardEntryDTO])
+async def get_global_scoreboard(user: AuthToken = Depends(get_current_user)):
+    """
+    Retorna o placar global de todos os usuários do sistema.
+    Acessível por qualquer usuário logado.
+    """
+    logger.info(f"Usuário {user.username} acessando o scoreboard global.")
+    return await interpreter.get_global_scoreboard()
+
 @router.get("/{comp_id}", response_model=List[ScoreboardEntryDTO])
 async def get_competition_scoreboard(comp_id: str, user: AuthToken = Depends(get_current_user)):
     """
