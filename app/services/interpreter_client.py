@@ -152,7 +152,13 @@ class InterpreterClient:
     async def record_attendance(self, attendance_data: Any, user_id: str) -> Dict:
         return await self._request("POST", "/attendance/", json=self._dump(attendance_data), params={"users_id": user_id})
 
+    async def get_all_attendances(self) -> List[Dict]:
+        return await self._request("GET", "/attendance/")
+
     async def get_user_attendance(self, user_id: str) -> List[Dict]:
-        return await self._request("GET", f"/attendance/{user_id}")
+        return await self._request("GET", f"/attendance/user/{user_id}")
+
+    async def get_competition_attendance(self, comp_id: str) -> List[Dict]:
+        return await self._request("GET", f"/attendance/competition/{comp_id}")
 
 interpreter = InterpreterClient()

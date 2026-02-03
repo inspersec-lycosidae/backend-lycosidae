@@ -1,8 +1,10 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Optional
 
 class AttendanceCreateDTO(BaseModel):
     competitions_id: str
+    users_id: Optional[str] = None
 
 class AttendanceReadDTO(BaseModel):
     id: str
